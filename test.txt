@@ -1,6 +1,47 @@
 begin
-push 10
-push 20
+
+push 0
+push 1
+
 add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+add
+
 out
 end
