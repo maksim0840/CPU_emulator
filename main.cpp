@@ -1,14 +1,10 @@
 #include <iostream>
 
 #include "libs/Parser/src/Parser.cpp"
-#include "libs/Parser/include/Parser.hpp"
 #include <vector>
 #include <array>
 #include <string>
-
-
-
-
+#include <any>
 
 struct incorrect_number_of_console_arguments {
 	const int input_arguments;
@@ -33,6 +29,5 @@ int main(int argc, char* argv[]) {
 		}
 		std::cout << '\n';
 	}
-
 	return 0;
 }

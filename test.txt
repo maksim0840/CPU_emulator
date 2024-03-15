@@ -1,6 +1,6 @@
-command1 10
-
-command2 sometext
-hello hello hello
-command3 90
-
+begin
+push 10
+push 20
+add
+out
+end

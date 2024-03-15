@@ -44,6 +44,6 @@ namespace storage {
 			void move_cells(Stack&, Stack&);
 	};
 
-	struct no_more_elements_exception{}; // IN PROGRESS
+	struct no_more_elements{}; // IN PROGRESS
 
 }

@@ -18,7 +18,7 @@ namespace storage {
 	template <typename T>
 	void Stack<T>::pop() {
 		if (end == nullptr) {
-			throw "no_more_elements_exception";
+			throw no_more_elements();
 		}
 
 		stack_cell* buff = end->back_ptr;
@@ -35,7 +35,7 @@ namespace storage {
 		if (end != nullptr) {
 			return end->value;
 		}
-		throw "no_more_elements_exception";
+		throw no_more_elements();
 	}
 
 	template <typename T>
