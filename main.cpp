@@ -1,17 +1,38 @@
 #include <iostream>
-#include "libs/Stack/src/Stack.cpp"
-#include "libs/Stack/include/Stack.hpp"
+
+#include "libs/Parser/src/Parser.cpp"
+#include "libs/Parser/include/Parser.hpp"
+#include <vector>
+#include <array>
+#include <string>
 
 
-int main() {
 
-	storage::Stack<int> stack1({10, 12, 48});
-	std::cout << stack1.top() << ' ';
-	stack1.pop();
-	std::cout << stack1.top() << ' ';
-	stack1.pop();
-	std::cout << stack1.top() << ' ';
-	stack1.pop();
-	std::cout << stack1.top() << ' ';
 
+
+struct incorrect_number_of_console_arguments {
+	const int input_arguments;
+};
+
+int main(int argc, char* argv[]) {
+	if (argc != 2) {
+		throw incorrect_number_of_console_arguments(argc);
+	}
+
+	storage::Stack<int> stack;
+	input::Parser parser;
+	commands::CPU cpu;
+
+	const char* file_name = argv[1];
+	std::vector<std::vector<std::string>> commands_vec = parser.parse_file(file_name);
+	cpu.execute_commands(commands_vec, stack);
+
+	for (auto vec : commands_vec) {
+		for (auto str : vec) {
+			std::cout << str << ' ';
+		}
+		std::cout << '\n';
+	}
+
+	return 0;
 }

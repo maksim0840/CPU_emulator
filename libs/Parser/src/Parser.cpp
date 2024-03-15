@@ -1,6 +1,12 @@
-#include <iostream>
+
 #include <fstream>
-#include <string>
+#include "../../CPU/src/CPU.cpp"
+#include "../../CPU/include/CPU.hpp"
+#include <vector>
+#include <array>
+
+
+typedef std::vector<std::vector<std::string>> multivec_strings;
 
 
 /* ERRORS */
@@ -8,10 +14,6 @@
 
 struct file_opening_error {
 	const char* file_name;
-};
-
-struct incorrect_number_of_console_arguments {
-	const int input_arguments;
 };
 
 struct unexpected_symbol {
@@ -28,104 +30,94 @@ struct too_many_line_separators_for_2_arguments_received {
 };
 
 
-/* FUNCTIONS */
+namespace input {
 
-// Allowed in naming symbols
-bool is_naming_allowed(const char sym) {
-	return ((97 <= sym && sym <= 122) || \
-		(47 <= sym && sym <= 57) || (sym == '_'));
-}
 
-// Skip ' ' and '\t' symbols, return last read symbol
-char skip_emptiness(std::ifstream& file, const int line) {
-	char sym;
-	// Skip symbols ' ' and '\t'
-	while (file.get(sym) && (sym == ' ' || sym == '\t'));
-
-	if (!(is_naming_allowed(sym) || sym == '\n' || sym == '\0')) {
-		throw unexpected_symbol(sym, line);
+class Parser {
+private:
+	char to_low_register(const char sym) {
+		if (65 <= sym && sym <= 90) {
+			return sym + 32;
+		}
+		return sym;
 	}
 
-	return sym;
-}
-
-bool parse_line(std::ifstream& file, const int line) {
-	char sym;
-	char first_sym = skip_emptiness(file, line);
-
-	if (first_sym == '\n') { // empty line
-		return true;
+	// Allowed in naming symbols
+	bool is_naming_allowed(const char sym) {
+		return ((97 <= sym && sym <= 122) || (65 <= sym && sym <= 90) || \
+			(48 <= sym <= 57) || (sym == '_'));
 	}
-	else if (first_sym == '\0') {
+
+	// Skip ' ' and '\t' symbols, return last read symbol
+	char skip_emptiness(std::ifstream& file, const int line) {
+		char sym = '\0';
+		// Skip symbols ' ' and '\t'
+		while (file.get(sym) && (sym == ' ' || sym == '\t'));
+
+		if (!(is_naming_allowed(sym) || sym == '\n' || sym == '\0')) {
+			throw unexpected_symbol(sym, line);
+		}
+
+		return sym;
+	}
+
+	bool parse_line(std::ifstream& file, const int line, multivec_strings& commands_vec) {
+		char sym = '\0';
+		char first_sym = skip_emptiness(file, line);
+		std::vector<std::string> line_args = {std::to_string(line)}; // the first arg always = line num
+
+		if (first_sym == '\n') { // empty line
+			return true;
+		}
+
+		std::string arg;
+		arg.push_back(first_sym);
+
+		// Read command
+		while (file.get(sym)) {
+			switch(sym) {
+			case ' ':
+				line_args.push_back(arg);
+				arg.clear();
+				break;
+			case '\0':
+			case '\n':
+				line_args.push_back(arg);
+				commands_vec.push_back(line_args);
+				return true;
+			default:
+				if (is_naming_allowed(sym)) {
+					arg.push_back(to_low_register(sym));
+					break;
+				}
+				throw unexpected_symbol(sym, line);
+			}
+		}
 		return false;
 	}
 
-	std::string command;
-	std::string value;
-	command.reserve(10);
-	value.reserve(10);
+public:
+	multivec_strings parse_file(const char* file_name) {
+		std::ifstream file;
+		file.open(file_name);
 
-	command.push_back(first_sym);
-	std::string* cur_filling = &command;
-	int separators = 0;
-
-	// Read command
-	while (file.get(sym)) {
-		switch(sym) {
-		case ' ':
-			++separators;
-			cur_filling = &value;
-			if (separators > 1) {
-				throw too_many_line_separators_for_2_arguments_received(line);
-			}
-			break;
-		case '\0':
-		case '\n':
-			if (command.empty() || value.empty()) {
-				throw missing_line_arguments(line);
-			}
-			// COMPLETE THE LINE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			std::cout << "Command:" << command << " Value:" << value << '\n';
-			return true;
-		default:
-			if (is_naming_allowed(sym)) {
-				(*cur_filling).push_back(sym);
-				break;
-			}
-			throw unexpected_symbol(sym, line);
+		if (!file.is_open()) {
+			throw file_opening_error(file_name);
 		}
-	}
-	return false;
-}
 
-void parse_file_starter(const char* file_name) {
-	std::ifstream file;
-	file.open(file_name);
+		int line = 0;
+		multivec_strings commands_vec; 
 
-	if (!file.is_open()) {
-		throw file_opening_error(file_name);
-	}
+		while(parse_line(file, line, commands_vec)) {
+			++line;
+		}
 
-	int line = 0;
-
-	while(parse_line(file, line)) {
-		++line;
+		file.close();
+		return commands_vec;
 	}
 
-	file.close();
-}
+
+};
 
 
-/* CONSOLE INPUT */
-
-
-int main(int argc, char* argv[]) {
-
-	if (argc != 2) {
-		throw incorrect_number_of_console_arguments(argc);
-	}
-
-	parse_file_starter(argv[1]);
-
-	return 0;
 }
