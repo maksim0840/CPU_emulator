@@ -15,7 +15,6 @@ namespace input {
 class Parser {
 	private:
 		char to_low_register(const char);
-		bool is_naming_allowed(const char);
 		bool parse_line(std::ifstream&, const int, multivec_strings&);
 	public:
 		multivec_strings parse_file(const std::string&);		

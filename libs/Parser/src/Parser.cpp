@@ -13,12 +13,6 @@ char Parser::to_low_register(const char sym) {
 	return sym;
 }
 
-// Allowed in naming symbols
-bool Parser::is_naming_allowed(const char sym) {
-	return ((97 <= sym && sym <= 122) || (65 <= sym && sym <= 90) || \
-		(48 <= sym && sym <= 57) || (sym == '_'));
-}
-
 bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& commands_vec) {
 	char sym = '\0';
 	while (file.get(sym) && (sym == ' ' || sym == '\t')); // skip emptiness

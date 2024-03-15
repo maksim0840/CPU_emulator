@@ -164,5 +164,3 @@ TEST(Parser, scan_test4) {
 
     EXPECT_EQ(check_res, parser.parse_file(file_name));
 }
-
-TEST()
