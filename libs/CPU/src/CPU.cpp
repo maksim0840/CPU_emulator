@@ -1,7 +1,6 @@
 #include "../include/CPU.hpp"
-
 namespace commands {
-	
+
 
 /* PRIVATE METHODS */
 
@@ -111,15 +110,20 @@ void CPU<T>::OUT(const int cur_command) {
 
 template <typename T>
 void CPU<T>::IN(const int cur_command) {
+	/* IN PROGRESS */
 }
 
 template <typename T>
 void CPU<T>::JMP(const int cur_command) {
-	execute_commands(tags[cpu_commands_vec[cur_command][2]][0], tags[cpu_commands_vec[cur_command][2]][1]);
+	execute_commands(tags[cpu_commands_vec[cur_command][2]][0] + 1, tags[cpu_commands_vec[cur_command][2]][1]);
 }
 
 template <typename T>
 void CPU<T>::RET(const int cur_command) {
+	if (cur_tag_building.empty()) {
+		throw no_tags_to_do_return(cpu_commands_vec[cur_command][0]);
+	}
+	// Save endpoint of function
 	tags[cur_tag_building][1] = cur_command;
 	cur_tag_building.clear();
 }
@@ -128,11 +132,11 @@ template <typename T>
 bool CPU<T>::does_this_command_exist(const int cur_command) {
 	const stringvec& line_args = cpu_commands_vec[cur_command];
 	// Find by command_name
-	auto iter1 = allowed_commands.find(line_args[1]);
-	if (iter1 == allowed_commands.end()) {
+	auto iter = allowed_commands.find(line_args[1]);
+	if (iter == allowed_commands.end()) {
 		if (line_args.size() == 2) { // "unknown command without values" = tag
 			cur_tag_building = line_args[1]; // save cur tag name
-			tags[line_args[1]] = {cur_command, -1}; // save start position
+			tags[cur_tag_building] = {cur_command, -1}; // save start position
 			return false;
 		}
 		else {
@@ -146,9 +150,9 @@ template <typename T>
 void CPU<T>::does_this_command_correct(const int cur_command) {
 	const stringvec& line_args = cpu_commands_vec[cur_command];
 
-	auto iter2 = no_values_commands.find(line_args[1]);
-	if ((iter2 == no_values_commands.end() && line_args.size() == 2) || \
-		(iter2 != no_values_commands.end() && line_args.size() == 3)) {
+	auto iter = no_values_commands.find(line_args[1]);
+	if ((iter == no_values_commands.end() && line_args.size() == 2) || \
+		(iter != no_values_commands.end() && line_args.size() != 2)) {
 		throw incorrect_args_value_in_command(line_args[1], line_args[0]);
 	}
 }
@@ -158,10 +162,8 @@ void CPU<T>::execute_commands(const int start_line, const int end_line) {
 	for (int i = start_line; i < end_line; ++i) {
 		if (does_this_command_exist(i)) {
 			does_this_command_correct(i);
+			allowed_commands[cpu_commands_vec[i][1]](i);
 		}
-
-		allowed_commands[cpu_commands_vec[i][1]](i);
-
 	}
 }
 

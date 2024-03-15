@@ -21,6 +21,10 @@ struct no_such_register {
 	const std::string line;
 };
 
+struct no_tags_to_do_return {
+	const std::string line;
+};
+
 typedef std::vector<std::string> stringvec;
 
 namespace commands {
@@ -50,6 +54,7 @@ class CPU {
 			{"div", [this](const int cur_command) {this->DIV(cur_command);}},
 			{"out", [this](const int cur_command) {this->OUT(cur_command);}},
 			{"in", [this](const int cur_command) {this->IN(cur_command);}},
+			{"jmp", [this](const int cur_command) {this->RET(cur_command);}},
 			{"ret", [this](const int cur_command) {this->RET(cur_command);}},
 		};
 
