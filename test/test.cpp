@@ -1,9 +1,13 @@
-#include "../libs/Stack/include/Stack.hpp"
-#include "../libs/Stack/src/Stack.cpp"
+
+#include "../libs/Parser/src/Parser.cpp"
+#include "../libs/CPU/src/CPU.cpp" // Stack lib connected to CPU lib
 #include <gtest/gtest.h>
 
 
-TEST(Constructors, constructor) {
+/* STACK */
+
+
+TEST(Stack, constructor) {
 
     storage::Stack<int> stack1({10, 12});
     storage::Stack<int> stack2(stack1);
@@ -28,7 +32,7 @@ TEST(Constructors, constructor) {
 }
 
 
-TEST(Assignment_operators, Assignment_operator) {
+TEST(Stack, assignment_operator) {
     
     storage::Stack<int> stack1;
     storage::Stack<int> stack2;
@@ -62,7 +66,7 @@ TEST(Assignment_operators, Assignment_operator) {
 }
 
 
-TEST(Methods, push) {
+TEST(Stack, push) {
     storage::Stack<int> stack1({10, 12});
     storage::Stack<char> stack2({'a', 'b', '\0', '_'});
     storage::Stack<double> stack3({10.954, 0.001, -890.1});
@@ -83,7 +87,7 @@ TEST(Methods, push) {
 }
 
 
-TEST(Methods, pop) {
+TEST(Stack, pop) {
     storage::Stack<int> stack1({});
     storage::Stack<char> stack2({'a', 'b', '\0'});
     storage::Stack<double> stack3({10.954, 0.001, -890.1});
@@ -102,7 +106,7 @@ TEST(Methods, pop) {
     EXPECT_EQ(stack3.to_vector(), check_res3);
 }
 
-TEST(Methods, top) {
+TEST(Stack, top) {
     storage::Stack<int> stack1({});
     storage::Stack<char> stack2({'a', 'b', '\0'});
     storage::Stack<double> stack3({10.954, 0.001, -890.1});
@@ -111,3 +115,54 @@ TEST(Methods, top) {
     EXPECT_EQ(stack2.top(), '\0');
     EXPECT_EQ(stack3.top(), -890.1);
 }
+
+TEST(Parser, file_opening_error) {
+    std::string file_name = "test.txt";
+    input::Parser parser;
+
+    EXPECT_ANY_THROW(parser.parse_file(file_name));
+
+}
+
+TEST(Parser, scan_test1) {
+    std::string file_name = "../../test/test1.txt";
+    input::Parser parser;
+
+    std::vector<std::vector<std::string>> check_res = {
+        {"2", "0", "command"}, {"5", "288", "kll"}, {"7", "begin"}
+    };
+
+    EXPECT_EQ(check_res, parser.parse_file(file_name));
+}
+
+TEST(Parser, scan_test2) {
+    std::string file_name = "../../test/test2.txt";
+    input::Parser parser;
+
+    std::vector<std::vector<std::string>> check_res = {
+        {"0", "test_double_sep", "", "10", "ok"}, {"10", ";"}, {"12", ";;"},
+        {"13", "command", "value"}, {"14", "command", "value"}
+    };
+
+    EXPECT_EQ(check_res, parser.parse_file(file_name));
+}
+
+TEST(Parser, scan_test3) {
+        std::string file_name = "../../test/test3.txt";
+    input::Parser parser;
+
+    std::vector<std::vector<std::string>> check_res = {};
+
+    EXPECT_EQ(check_res, parser.parse_file(file_name));
+}
+
+TEST(Parser, scan_test4) {
+        std::string file_name = "../../test/test4.txt";
+    input::Parser parser;
+
+    std::vector<std::vector<std::string>> check_res = {};
+
+    EXPECT_EQ(check_res, parser.parse_file(file_name));
+}
+
+TEST()

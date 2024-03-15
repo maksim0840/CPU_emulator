@@ -10,12 +10,14 @@ namespace storage {
 		public:
 			// 	Methods
 			void push(const T&);
+			void push(T&& val);
 			void pop();
-			T& top() const;
+			T& top();
+			const T& top() const;
 			std::vector<T> to_vector() const;
 
 			// Constructors
-			Stack();
+			Stack();                  
 			Stack(const std::initializer_list<T>&);
 			~Stack();
 			Stack(const Stack&);

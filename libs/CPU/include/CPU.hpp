@@ -1,4 +1,4 @@
-#include <iostream>
+#pragma once
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -31,6 +31,7 @@ class CPU {
 		std::vector<stringvec> cpu_commands_vec;
 		storage::Stack<T> cpu_stack;
 		std::unordered_map<std::string, T> cpu_registers;
+		std::vector<T> output;
 
 		bool allow_command_execution = false;
 		std::unordered_map<std::string, std::vector<int>> tags;
@@ -77,6 +78,7 @@ class CPU {
 
 	public:
 		void cpu_starter(const std::vector<stringvec>&, storage::Stack<T>&);
+		std::vector<T> get_output();
 };
 
 

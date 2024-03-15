@@ -1,7 +1,7 @@
 #include "../include/CPU.hpp"
 
 namespace commands {
-
+	
 
 /* PRIVATE METHODS */
 
@@ -105,7 +105,7 @@ void CPU<T>::OUT(const int cur_command) {
 	if (!allow_command_execution) {
 		return;
 	}
-	std::cout << cpu_stack.top() << '\n';
+	output.push_back(cpu_stack.top());
 	cpu_stack.pop();
 }
 
@@ -176,6 +176,9 @@ void CPU<T>::cpu_starter(const std::vector<stringvec>& commands_vec, storage::St
 	execute_commands(0, commands_vec.size());
 }
 
-
+template <typename T>
+std::vector<T> CPU<T>::get_output() {
+	return output;
+}
 
 }

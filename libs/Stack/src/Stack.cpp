@@ -16,6 +16,16 @@ namespace storage {
 	}
 
 	template <typename T>
+	void Stack<T>::push(T&& val) {
+		stack_cell* cell = new stack_cell{.back_ptr = end, .value = val};
+
+		end = cell;
+		if (begin != nullptr) {
+			begin = cell;
+		}
+	}
+
+	template <typename T>
 	void Stack<T>::pop() {
 		if (end == nullptr) {
 			throw no_more_elements();
@@ -31,7 +41,15 @@ namespace storage {
 	}
 
 	template <typename T>
-	T& Stack<T>::top() const {
+	T& Stack<T>::top() {
+		if (end != nullptr) {
+			return end->value;
+		}
+		throw no_more_elements();
+	}
+
+	template <typename T>
+	const T& Stack<T>::top() const {
 		if (end != nullptr) {
 			return end->value;
 		}

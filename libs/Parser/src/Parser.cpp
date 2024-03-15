@@ -16,33 +16,20 @@ char Parser::to_low_register(const char sym) {
 // Allowed in naming symbols
 bool Parser::is_naming_allowed(const char sym) {
 	return ((97 <= sym && sym <= 122) || (65 <= sym && sym <= 90) || \
-		(48 <= sym <= 57) || (sym == '_'));
-}
-
-// Skip ' ' and '\t' symbols, return last read symbol
-char Parser::skip_emptiness(std::ifstream& file, const int line) {
-	char sym = '\0';
-	// Skip symbols ' ' and '\t'
-	while (file.get(sym) && (sym == ' ' || sym == '\t'));
-
-	if (!(is_naming_allowed(sym) || sym == '\n' || sym == '\0')) {
-		throw unexpected_symbol(sym, line);
-	}
-
-	return sym;
+		(48 <= sym && sym <= 57) || (sym == '_'));
 }
 
 bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& commands_vec) {
 	char sym = '\0';
-	char first_sym = skip_emptiness(file, line);
+	while (file.get(sym) && (sym == ' ' || sym == '\t')); // skip emptiness
 	std::vector<std::string> line_args = {std::to_string(line)}; // the first arg always = line num
 
-	if (first_sym == '\n') { // empty line
+	if (sym == '\n') { // empty line
 		return true;
 	}
 
 	std::string arg;
-	arg.push_back(first_sym);
+	arg.push_back(to_low_register(sym));
 
 	// Read command
 	while (file.get(sym)) {
@@ -57,11 +44,7 @@ bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& c
 			commands_vec.push_back(line_args);
 			return true;
 		default:
-			if (is_naming_allowed(sym)) {
-				arg.push_back(to_low_register(sym));
-				break;
-			}
-			throw unexpected_symbol(sym, line);
+			arg.push_back(to_low_register(sym));
 		}
 	}
 	return false;
@@ -69,9 +52,9 @@ bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& c
 
 
 /* PUBLIC METHODS */
+	
 
-
-multivec_strings Parser::parse_file(const char* file_name) {
+multivec_strings Parser::parse_file(const std::string& file_name) {
 	std::ifstream file;
 	file.open(file_name);
 
