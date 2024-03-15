@@ -1,18 +1,19 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <functional>
 #include "../../Stack/src/Stack.cpp"
 #include "../../Stack/include/Stack.hpp"
 
 struct unknown_command {
-	const std::string command,
-	const std::string line
+	const std::string command;
+	const std::string line;
 };
 
 struct incorrect_args_value_in_command {
-	const std::string command,
-	const std::string line
+	const std::string command;
+	const std::string line;
 };
 
 typedef std::vector<std::string> stringvec;
@@ -87,15 +88,15 @@ public:
 
 		for (const stringvec& line_args : commands_vec) {
 			// does this command exist
-			auto iter = allowed_commands.find(line_args[1]);
-			if (iter == allowed_commands.end()) {
+			auto iter1 = allowed_commands.find(line_args[1]);
+			if (iter1 == allowed_commands.end()) {
 				throw unknown_command(line_args[1], line_args[0]);
 			}
 
 			// does this command correct
-			auto iter = no_values_commands.find(line_args[1]);
-			if ((iter == allowed_commands.end() && line_args.size() == 2) || \
-				(iter != allowed_commands.end() && line_args.size() == 3)) {
+			auto iter2 = no_values_commands.find(line_args[1]);
+			if ((iter2 == no_values_commands.end() && line_args.size() == 2) || \
+				(iter2 != no_values_commands.end() && line_args.size() == 3)) {
 				throw incorrect_args_value_in_command(line_args[1], line_args[0]);
 			}
 
