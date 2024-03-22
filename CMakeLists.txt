@@ -26,17 +26,21 @@ add_executable(main main.cpp)
 add_subdirectory(libs/Stack)
 add_subdirectory(libs/CPU)
 add_subdirectory(libs/Parser)
+add_subdirectory(libs/Preprocessor)
+add_subdirectory(libs/Starter)
 
-target_link_libraries(CPU Stack)
-target_link_libraries(main Parser CPU)
+target_link_libraries(CPU Preprocessor Stack)
+target_link_libraries(Starter Parser CPU)
+target_link_libraries(main Starter)
 target_link_libraries(test_Parser Parser GTest::gtest_main)
 target_link_libraries(test_Stack Stack GTest::gtest_main)
 target_link_libraries(test_CPU CPU GTest::gtest_main)
+# target_link_libraries(test_Preprocessor CPU GTest::gtest_main)
+# target_link_libraries(test_Starter CPU GTest::gtest_main)
 
 target_include_directories(main PUBLIC
                           "${PROJECT_BINARY_DIR}"
-                          "${PROJECT_SOURCE_DIR}/libs/Parser/include"
-                          "${PROJECT_SOURCE_DIR}/libs/CPU/include"
+                          "${PROJECT_SOURCE_DIR}/libs/Starter/include"
 )
 target_include_directories(test_Parser PUBLIC
                           "${PROJECT_BINARY_DIR}"
@@ -46,8 +50,18 @@ target_include_directories(test_Stack PUBLIC
                           "${PROJECT_BINARY_DIR}"
                           "${PROJECT_SOURCE_DIR}/libs/Stack/include"
 )
+# target_include_directories(test_Preprocessor PUBLIC
+#                           "${PROJECT_BINARY_DIR}"
+#                           "${PROJECT_SOURCE_DIR}/libs/Preprocessor/include"
+# )
 target_include_directories(test_CPU PUBLIC
                           "${PROJECT_BINARY_DIR}"
                           "${PROJECT_SOURCE_DIR}/libs/Stack/include"
+                          "${PROJECT_SOURCE_DIR}/libs/Preprocessor/include"
                           "${PROJECT_SOURCE_DIR}/libs/CPU/include"
 )
+# target_include_directories(test_Starter PUBLIC
+#                           "${PROJECT_BINARY_DIR}"
+#                           "${PROJECT_SOURCE_DIR}/libs/Parser/include"
+#                           "${PROJECT_SOURCE_DIR}/libs/CPU/include"
+# )
