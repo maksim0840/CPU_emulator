@@ -1,0 +1,29 @@
+func:
+
+	push 1
+	pushr pc
+	add
+	popr pc
+
+	pushr ax
+	pushr pc
+	mul
+	popr ax
+
+	pushr pc
+	push 6
+	ja tag0
+
+ret
+
+begin
+	push 1
+	push 1
+	popr ax
+	popr pc
+
+	tag0
+	call func
+	pushr ax
+	out
+end
