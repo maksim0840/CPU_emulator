@@ -1,47 +1,31 @@
+func:
+	popr ax
+	pushr ax
+	pushr ax
+	out
+	
+	push 1
+	pushr pc
+	add
+	popr pc
+	
+	add
+	popr bx
+	
+	pushr ax
+	pushr bx
+ret
+
 begin
+	push 0
+	push 1
 
-push 0
-push 1
-
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-add
-
-out
+	push 0
+	popr pc
+	
+	tag0
+	call func
+	pushr pc
+	push 40
+	ja tag0
 end

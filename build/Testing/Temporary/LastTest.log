@@ -1,0 +1,360 @@
+Start testing: Mar 20 21:48 MSK
+----------------------------------------------------------
+1/13 Testing: Stack.constructor
+1/13 Test: Stack.constructor
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack" "--gtest_filter=Stack.constructor" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack.constructor" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Stack.constructor
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Stack
+[ RUN      ] Stack.constructor
+[       OK ] Stack.constructor (0 ms)
+[----------] 1 test from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack.constructor" end time: Mar 20 21:48 MSK
+"Stack.constructor" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/13 Testing: Stack.assignment_operator
+2/13 Test: Stack.assignment_operator
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack" "--gtest_filter=Stack.assignment_operator" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack.assignment_operator" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Stack.assignment_operator
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Stack
+[ RUN      ] Stack.assignment_operator
+[       OK ] Stack.assignment_operator (0 ms)
+[----------] 1 test from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack.assignment_operator" end time: Mar 20 21:48 MSK
+"Stack.assignment_operator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/13 Testing: Stack.push
+3/13 Test: Stack.push
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack" "--gtest_filter=Stack.push" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack.push" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Stack.push
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Stack
+[ RUN      ] Stack.push
+[       OK ] Stack.push (0 ms)
+[----------] 1 test from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack.push" end time: Mar 20 21:48 MSK
+"Stack.push" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/13 Testing: Stack.pop
+4/13 Test: Stack.pop
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack" "--gtest_filter=Stack.pop" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack.pop" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Stack.pop
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Stack
+[ RUN      ] Stack.pop
+[       OK ] Stack.pop (0 ms)
+[----------] 1 test from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack.pop" end time: Mar 20 21:48 MSK
+"Stack.pop" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/13 Testing: Stack.top
+5/13 Test: Stack.top
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack" "--gtest_filter=Stack.top" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack.top" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Stack.top
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Stack
+[ RUN      ] Stack.top
+[       OK ] Stack.top (0 ms)
+[----------] 1 test from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack.top" end time: Mar 20 21:48 MSK
+"Stack.top" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/13 Testing: Stack
+6/13 Test: Stack
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Stack
+"Stack" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from Stack
+[ RUN      ] Stack.constructor
+[       OK ] Stack.constructor (0 ms)
+[ RUN      ] Stack.assignment_operator
+[       OK ] Stack.assignment_operator (0 ms)
+[ RUN      ] Stack.push
+[       OK ] Stack.push (0 ms)
+[ RUN      ] Stack.pop
+[       OK ] Stack.pop (0 ms)
+[ RUN      ] Stack.top
+[       OK ] Stack.top (0 ms)
+[----------] 5 tests from Stack (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 5 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Stack" end time: Mar 20 21:48 MSK
+"Stack" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/13 Testing: CPU
+7/13 Test: CPU
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/CPU/test_CPU"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/CPU
+"CPU" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 0 tests from 0 test suites.
+[==========] 0 tests from 0 test suites ran. (0 ms total)
+[  PASSED  ] 0 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"CPU" end time: Mar 20 21:48 MSK
+"CPU" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/13 Testing: Parser.file_opening_error
+8/13 Test: Parser.file_opening_error
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser" "--gtest_filter=Parser.file_opening_error" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser.file_opening_error" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Parser.file_opening_error
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Parser
+[ RUN      ] Parser.file_opening_error
+[       OK ] Parser.file_opening_error (0 ms)
+[----------] 1 test from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser.file_opening_error" end time: Mar 20 21:48 MSK
+"Parser.file_opening_error" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/13 Testing: Parser.scan_test1
+9/13 Test: Parser.scan_test1
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser" "--gtest_filter=Parser.scan_test1" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser.scan_test1" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Parser.scan_test1
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Parser
+[ RUN      ] Parser.scan_test1
+[       OK ] Parser.scan_test1 (0 ms)
+[----------] 1 test from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser.scan_test1" end time: Mar 20 21:48 MSK
+"Parser.scan_test1" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/13 Testing: Parser.scan_test2
+10/13 Test: Parser.scan_test2
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser" "--gtest_filter=Parser.scan_test2" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser.scan_test2" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Parser.scan_test2
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Parser
+[ RUN      ] Parser.scan_test2
+[       OK ] Parser.scan_test2 (0 ms)
+[----------] 1 test from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser.scan_test2" end time: Mar 20 21:48 MSK
+"Parser.scan_test2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/13 Testing: Parser.scan_test3
+11/13 Test: Parser.scan_test3
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser" "--gtest_filter=Parser.scan_test3" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser.scan_test3" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Parser.scan_test3
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Parser
+[ RUN      ] Parser.scan_test3
+[       OK ] Parser.scan_test3 (0 ms)
+[----------] 1 test from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser.scan_test3" end time: Mar 20 21:48 MSK
+"Parser.scan_test3" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/13 Testing: Parser.scan_test4
+12/13 Test: Parser.scan_test4
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser" "--gtest_filter=Parser.scan_test4" "--gtest_also_run_disabled_tests"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser.scan_test4" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Parser.scan_test4
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Parser
+[ RUN      ] Parser.scan_test4
+[       OK ] Parser.scan_test4 (0 ms)
+[----------] 1 test from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser.scan_test4" end time: Mar 20 21:48 MSK
+"Parser.scan_test4" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/13 Testing: Parser
+13/13 Test: Parser
+Command: "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser"
+Directory: /home/user/Documents/C++/cpu_emulator/build/libs/Parser
+"Parser" start time: Mar 20 21:48 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/user/Documents/C++/cpu_emulator/build/_deps/googletest-src/googletest/src/gtest_main.cc
+[==========] Running 5 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 5 tests from Parser
+[ RUN      ] Parser.file_opening_error
+[       OK ] Parser.file_opening_error (0 ms)
+[ RUN      ] Parser.scan_test1
+[       OK ] Parser.scan_test1 (0 ms)
+[ RUN      ] Parser.scan_test2
+[       OK ] Parser.scan_test2 (0 ms)
+[ RUN      ] Parser.scan_test3
+[       OK ] Parser.scan_test3 (0 ms)
+[ RUN      ] Parser.scan_test4
+[       OK ] Parser.scan_test4 (0 ms)
+[----------] 5 tests from Parser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 5 tests.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Parser" end time: Mar 20 21:48 MSK
+"Parser" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 20 21:48 MSK

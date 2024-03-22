@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <unordered_map>
 #include <string>
@@ -8,7 +9,7 @@ struct incorrect_number_of_line_arguments {
 	const int line;
 };
 
-namespace proc {
+namespace preproc {
 
 
 // template <typename T>
@@ -18,12 +19,12 @@ public:
 	enum class Command {
 		BEGIN , END, PUSH, POP, PUSHR, POPR, ADD,
 		SUB, MUL, DIV, OUT, IN, JMP, JEQ, JNE, 
-		JA, JAE, JB, JBE, CALL, RET, TAG
+		JA, JAE, JB, JBE, CALL, RET, REDIRECT
 	};
 
 	struct command_line {
 		Command type;
-		int value;
+		std::string value;
 	};
 
 	struct command_info {
@@ -31,16 +32,16 @@ public:
 		Command type;
 	};
 
-	struct function_range {
-		int tag_ind;
+	struct redirect_range {
+		int start_ind;
 		int ret_ind;
 	};
 
 	typedef std::vector<std::string> stringvec;
 	typedef std::vector<command_line> commands_vec;
-	typedef std::unordered_map<std::string, function_range> functions_map;
+	typedef std::unordered_map<std::string, redirect_range> redirects_map;
 
-	void fill_params_from_string_commands(const std::vector<stringvec>&, commands_vec&, functions_map&);
+	void fill_params_from_string_commands(const std::vector<stringvec>&, commands_vec&, redirects_map&);
 
 private:
 	std::unordered_map<std::string, command_info> command_classification = {
@@ -66,11 +67,11 @@ private:
 		{"call", {1, Command::CALL}},
 	};
 
-	void get_value_from_string(int&, const stringvec&);
+	std::string cur_func_name = "";
 
 	void get_command(const stringvec&, const int, commands_vec&);
 
-	void get_function(const stringvec&, const int, commands_vec&, functions_map&);
+	void get_redirect(const stringvec&, const int, commands_vec&, redirects_map&);
 };
 
 

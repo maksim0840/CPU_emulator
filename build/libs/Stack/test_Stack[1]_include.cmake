@@ -1,0 +1,5 @@
+if(EXISTS "/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack[1]_tests.cmake")
+  include("/home/user/Documents/C++/cpu_emulator/build/libs/Stack/test_Stack[1]_tests.cmake")
+else()
+  add_test(test_Stack_NOT_BUILT test_Stack_NOT_BUILT)
+endif()

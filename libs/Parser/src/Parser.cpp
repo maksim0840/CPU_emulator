@@ -2,7 +2,7 @@
 
 namespace input {
 
-
+ 
 /* PRIVATE METHODS */
 
 
@@ -24,7 +24,6 @@ bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& c
 
 	std::string arg;
 	arg.push_back(to_low_register(sym));
-
 	// Read command
 	while (file.get(sym)) {
 		switch(sym) {
@@ -32,7 +31,6 @@ bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& c
 			line_args.push_back(arg);
 			arg.clear();
 			break;
-		case '\0':
 		case '\n':
 			line_args.push_back(arg);
 			commands_vec.push_back(line_args);
@@ -40,6 +38,12 @@ bool Parser::parse_line(std::ifstream& file, const int line, multivec_strings& c
 		default:
 			arg.push_back(to_low_register(sym));
 		}
+	}
+
+	// '\0' sym situation
+	if (!(arg.empty() && commands_vec.empty()) && sym != '\0') {
+		line_args.push_back(arg);
+		commands_vec.push_back(line_args);
 	}
 	return false;
 }

@@ -1,67 +1,77 @@
-#pragma once
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <functional>
 #include "../../Stack/src/Stack.cpp"
-#include "../../Stack/include/Stack.hpp"
+#include "../../Preprocessor/src/Preprocessor.cpp"
+#include <unordered_set>
 
-struct unknown_command {
-	const std::string command;
-	const std::string line;
-};
 
-struct incorrect_args_value_in_command {
-	const std::string command;
-	const std::string line;
-};
+namespace proc {
+
 
 struct no_such_register {
-	const std::string cpu_register;
-	const std::string line;
+	std::string name;
+	int line;
 };
 
-struct no_tags_to_do_return {
-	const std::string line;
-};
+typedef preproc::Preprocessor::commands_vec commands_vec;
+typedef preproc::Preprocessor::redirects_map redirects_map;
 
-typedef std::vector<std::string> stringvec;
-
-namespace commands {
 
 template <typename T>
-class CPU {	
+class Cpu {
+	protected:
+		storage::Stack<T> stack;
+		commands_vec commands;
+		redirects_map redirects;
+};
+
+
+template <typename T>
+class CpuOutput {
 	private:
-		std::vector<stringvec> cpu_commands_vec;
-		storage::Stack<T> cpu_stack;
-		std::unordered_map<std::string, T> cpu_registers;
 		std::vector<T> output;
 
-		bool allow_command_execution = false;
-		std::unordered_map<std::string, std::vector<int>> tags;
-		std::string cur_tag_building = "";
+	protected:
+		void push_output(const T&);
+		std::vector<T> get_output();
+};
 
-		std::unordered_map<std::string, std::function<void(const int)>> allowed_commands = {
-			{"begin", [this](const int cur_command) {this->BEGIN(cur_command);}},
-			{"end", [this](const int cur_command) {this->END(cur_command);}},
-			{"push", [this](const int cur_command) {this->PUSH(cur_command);}},
-			{"pop", [this](const int cur_command) {this->POP(cur_command);}},
-			{"pushr", [this](const int cur_command) {this->PUSHR(cur_command);}},
-			{"popr", [this](const int cur_command) {this->POPR(cur_command);}},
-			{"add", [this](const int cur_command) {this->ADD(cur_command);}},
-			{"sub", [this](const int cur_command) {this->SUB(cur_command);}},
-			{"mul", [this](const int cur_command) {this->MUL(cur_command);}},
-			{"div", [this](const int cur_command) {this->DIV(cur_command);}},
-			{"out", [this](const int cur_command) {this->OUT(cur_command);}},
-			{"in", [this](const int cur_command) {this->IN(cur_command);}},
-			{"jmp", [this](const int cur_command) {this->RET(cur_command);}},
-			{"ret", [this](const int cur_command) {this->RET(cur_command);}},
+
+class CpuRedirect {
+	private:
+		int ind_start = -1;
+		int ind_end = -1;	
+		bool break_main_function_flag = false;
+
+		void reset();
+
+	protected:
+		void set_redirect(const int, const int, const bool);
+		bool get_redirect(int&, int&);
+};
+
+
+template <typename T>
+class CpuRegisters {
+	private:
+		std::unordered_map<std::string, T> registers;
+		std::unordered_set<std::string> allowed_registers = {
+			"ax", "bx", "cx", "dx",
+			"bp", "sp", "si", "di",  
+			"ip", "flags", "pc"
 		};
 
-		std::unordered_set<std::string> no_values_commands = {
-			"begin", "end", "pop", "add", "sub", "mul", "div", "out", "in", "ret"
-		};
+	protected:
+		void set_register(const std::string&, const T&, const int);
+		T get_register(const std::string&, const int);
+};
 
+
+template <typename T>
+class CpuCommandsExecuter: protected virtual Cpu<T>, protected virtual CpuRedirect, private virtual CpuOutput<T>, private virtual CpuRegisters<T> {
+	private:
+		bool commands_execute_flag = false;
+		T to_num_value(const std::string&);
+
+	protected:
 		void BEGIN(const int);
 		void END(const int);
 		void PUSH(const int);
@@ -73,17 +83,60 @@ class CPU {
 		void MUL(const int);
 		void DIV(const int);
 		void OUT(const int);
-		void IN(const int);
+		void IN(const int){};
 		void JMP(const int);
-		void RET(const int);
+		void JEQ(const int);
+		void JNE(const int);
+		void JA(const int);
+		void JAE(const int);
+		void JB(const int);
+		void JBE(const int);
+		void CALL(const int);
+		void RET(const int){};
+		void REDIRECT(const int){};
+};
 
-		bool does_this_command_exist(const int);
-		void does_this_command_correct(const int);
-		void execute_commands(const int, const int);
 
+template <typename T>
+class CpuCommandsReader: private virtual CpuCommandsExecuter<T> {
+	private:
+		std::unordered_map<preproc::Preprocessor::Command, std::function<void(const T)>> command_functions = {
+			{preproc::Preprocessor::Command::BEGIN, [this](const int ind) {this->CpuCommandsExecuter<T>::BEGIN(ind);}},
+			{preproc::Preprocessor::Command::END, [this](const int ind) {this->CpuCommandsExecuter<T>::END(ind);}},
+			{preproc::Preprocessor::Command::PUSH, [this](const int ind) {this->CpuCommandsExecuter<T>::PUSH(ind);}},
+			{preproc::Preprocessor::Command::POP, [this](const int ind) {this->CpuCommandsExecuter<T>::POP(ind);}},
+			{preproc::Preprocessor::Command::PUSHR, [this](const int ind) {this->CpuCommandsExecuter<T>::PUSHR(ind);}},
+			{preproc::Preprocessor::Command::POPR, [this](const int ind) {this->CpuCommandsExecuter<T>::POPR(ind);}},
+			{preproc::Preprocessor::Command::ADD, [this](const int ind) {this->CpuCommandsExecuter<T>::ADD(ind);}},
+			{preproc::Preprocessor::Command::SUB, [this](const int ind) {this->CpuCommandsExecuter<T>::SUB(ind);}},
+			{preproc::Preprocessor::Command::MUL, [this](const int ind) {this->CpuCommandsExecuter<T>::MUL(ind);}},
+			{preproc::Preprocessor::Command::DIV, [this](const int ind) {this->CpuCommandsExecuter<T>::DIV(ind);}},
+			{preproc::Preprocessor::Command::OUT, [this](const int ind) {this->CpuCommandsExecuter<T>::OUT(ind);}},
+			{preproc::Preprocessor::Command::IN, [this](const int ind) {this->CpuCommandsExecuter<T>::IN(ind);}},
+			{preproc::Preprocessor::Command::JMP, [this](const int ind) {this->CpuCommandsExecuter<T>::JMP(ind);}},
+			{preproc::Preprocessor::Command::JEQ, [this](const int ind) {this->CpuCommandsExecuter<T>::JEQ(ind);}},
+			{preproc::Preprocessor::Command::JNE, [this](const int ind) {this->CpuCommandsExecuter<T>::JNE(ind);}},
+			{preproc::Preprocessor::Command::JA, [this](const int ind) {this->CpuCommandsExecuter<T>::JA(ind);}},
+			{preproc::Preprocessor::Command::JAE, [this](const int ind) {this->CpuCommandsExecuter<T>::JAE(ind);}},
+			{preproc::Preprocessor::Command::JB, [this](const int ind) {this->CpuCommandsExecuter<T>::JB(ind);}},
+			{preproc::Preprocessor::Command::JBE, [this](const int ind) {this->CpuCommandsExecuter<T>::JBE(ind);}},
+			{preproc::Preprocessor::Command::CALL, [this](const int ind) {this->CpuCommandsExecuter<T>::CALL(ind);}},
+			{preproc::Preprocessor::Command::RET, [this](const int ind) {this->CpuCommandsExecuter<T>::RET(ind);}},
+			{preproc::Preprocessor::Command::REDIRECT, [this](const int ind) {this->CpuCommandsExecuter<T>::REDIRECT(ind);}},
+		};
+
+		bool check_for_redirects();
+
+	protected:
+		void read(const int, const int);
+};
+
+
+template <typename T>
+class CpuStarter: private virtual Cpu<T>, private virtual CpuCommandsReader<T>, private virtual CpuOutput<T> {
 	public:
-		void cpu_starter(const std::vector<stringvec>&, storage::Stack<T>&);
-		std::vector<T> get_output();
+		void start(const commands_vec&, const redirects_map&, storage::Stack<T>&);		
+		std::vector<T> get_result();
 };
 
 

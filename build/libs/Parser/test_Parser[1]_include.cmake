@@ -1,0 +1,5 @@
+if(EXISTS "/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser[1]_tests.cmake")
+  include("/home/user/Documents/C++/cpu_emulator/build/libs/Parser/test_Parser[1]_tests.cmake")
+else()
+  add_test(test_Parser_NOT_BUILT test_Parser_NOT_BUILT)
+endif()

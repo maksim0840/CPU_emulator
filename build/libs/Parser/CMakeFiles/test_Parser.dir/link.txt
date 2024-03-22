@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -O0 -Wall -fprofile-arcs -ftest-coverage -fprofile-arcs -ftest-coverage CMakeFiles/test_Parser.dir/test/test.cpp.o -o test_Parser  libParser.a ../../lib/libgtest_main.a ../../lib/libgtest.a 
