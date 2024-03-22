@@ -1,0 +1,9 @@
+begin
+	push 10
+	
+	jmp tag0
+	push 15
+	tag0
+	
+	out
+end

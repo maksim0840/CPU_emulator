@@ -315,7 +315,7 @@ bool CpuCommandsReader<T>::check_for_redirects() { // returns 1 if jmp, returns 
 	return break_flag;
 }
 
-//protected:
+// protected:
 
 template <typename T>
 void CpuCommandsReader<T>::read(const int start_ind, const int end_ind) {

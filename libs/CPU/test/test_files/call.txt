@@ -1,0 +1,10 @@
+func:
+push 15
+ret
+
+
+begin
+	push 10
+	call func
+	out
+end

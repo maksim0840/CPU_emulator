@@ -1,0 +1,12 @@
+begin
+	push 10
+	push 15
+
+	popr ax
+	popr bx
+
+	pushr ax
+	out
+	pushr bx
+	out
+end

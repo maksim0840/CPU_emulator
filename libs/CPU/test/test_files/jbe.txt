@@ -1,0 +1,11 @@
+begin
+	push 7
+	push 10
+	push 10
+	
+	jbe tag0
+	push 15
+	tag0
+	
+	out
+end

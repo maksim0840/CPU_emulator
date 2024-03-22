@@ -1,0 +1,6 @@
+begin
+	push 10
+	push 15
+	mul
+	out
+end
