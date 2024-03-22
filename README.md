@@ -16,11 +16,9 @@ cmake ..
 cmake --build .
 ```
 
-Tests result (in "build" dir)
+Tests result
 ```
-cd test
 ctest
-cd ..
 ```
 
 Download lcov to see test results
