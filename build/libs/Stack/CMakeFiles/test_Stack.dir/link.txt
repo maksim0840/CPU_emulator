@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -O0 -Wall -fprofile-arcs -ftest-coverage -fprofile-arcs -ftest-coverage CMakeFiles/test_Stack.dir/test/test.cpp.o -o test_Stack  libStack.a ../../lib/libgtest_main.a ../../lib/libgtest.a 

@@ -1,5 +1,0 @@
-if(EXISTS "/home/user/Documents/C++/cpu_emulator/build/libs/CPU/test_CPU[1]_tests.cmake")
-  include("/home/user/Documents/C++/cpu_emulator/build/libs/CPU/test_CPU[1]_tests.cmake")
-else()
-  add_test(test_CPU_NOT_BUILT test_CPU_NOT_BUILT)
-endif()
